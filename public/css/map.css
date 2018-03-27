@@ -29,13 +29,40 @@
 }
 
 .linkButton{
-   background:none!important;
-     border:none; 
-     padding:0!important;
-    
-    /*optional*/
-    font-family:arial,sans-serif; /*input has OS specific font-family*/
-     color:#069;
-     text-decoration:underline;
-     cursor:pointer;
+	background:none!important;
+	border:none; 
+	padding:0!important;
+
+	/*optional*/
+	font-family:arial,sans-serif; /*input has OS specific font-family*/
+	color:#069;
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+
+
+
+.background-image{
+	/*/object-mapper/public/assets/bg_images/mb2.jpg*/
+	background: url("/object-mapper/public/assets/bg_images/mb2.jpeg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	opacity: 1;
+	z-index: -1;
+
+/*	background-position: center;
+	background-attachment: fixed;       
+	webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;*/
+
+
+/*
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-duration: 10s;
+	/*animation-direction: alternate;*/*/
+
 }

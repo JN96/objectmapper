@@ -57,58 +57,60 @@ infoWindow = new google.maps.InfoWindow();
     content: document.getElementById('message')
   });
 
-  google.maps.event.addListener(map, 'click', function(event) {
-    if (!marker) {
-      marker = new google.maps.Marker({
-        position: event.latLng,
-        draggable: true,
-        title: "Update",
-        map: map,
-        animation:google.maps.Animation.BOUNCE
-      });
-    }else{
-      marker.setPosition(event.latLng);
-    }
-
-    console.log(marker.getPosition().lat());
-    console.log(marker.getPosition().lng());
-
-    $("#lat").val(marker.getPosition().lat());
-    $("#lng").val(marker.getPosition().lng());
-
-    google.maps.event.addListener(marker, 'click', function() {
-      document.getElementById('form').removeAttribute("style");
-      infowindow.open(map, marker);
+// Handles plotting initial marker on click. If marker is present and map is clicked again,
+// marker will be removed and appear at the next clicked location
+google.maps.event.addListener(map, 'click', function(event) {
+  if (!marker) {
+    marker = new google.maps.Marker({
+      position: event.latLng,
+      draggable: true,
+      title: "Update",
+      map: map,
+      animation:google.maps.Animation.BOUNCE
     });
-  });
-
-
-  function downloadUrl(url, callback) {
-    var request = window.ActiveXObject ?
-    new ActiveXObject('Microsoft.XMLHTTP') :
-    new XMLHttpRequest;
-
-    request.onreadystatechange = function() {
-      if (request.readyState == 4) {
-        request.onreadystatechange = doNothing;
-        callback(request.responseText, request.status);
-      }
-    };
-
-    request.open('GET', url, true);
-    request.send(null);
+  }else{
+    marker.setPosition(event.latLng);
   }
 
-  function doNothing () {
-  }
+  console.log(marker.getPosition().lat());
+  console.log(marker.getPosition().lng());
 
-  var infoWindow;
+  $("#lat").val(marker.getPosition().lat());
+  $("#lng").val(marker.getPosition().lng());
 
-
-  $(document).ready(function(){
-    displayMarkers();
-
+  google.maps.event.addListener(marker, 'click', function() {
+    document.getElementById('form').removeAttribute("style");
+    infowindow.open(map, marker);
   });
+});
+
+
+function downloadUrl(url, callback) {
+  var request = window.ActiveXObject ?
+  new ActiveXObject('Microsoft.XMLHTTP') :
+  new XMLHttpRequest;
+
+  request.onreadystatechange = function() {
+    if (request.readyState == 4) {
+      request.onreadystatechange = doNothing;
+      callback(request.responseText, request.status);
+    }
+  };
+
+  request.open('GET', url, true);
+  request.send(null);
+}
+
+function doNothing () {
+}
+
+var infoWindow;
+
+
+$(document).ready(function(){
+  displayMarkers();
+
+});
 
 }
 
@@ -857,3 +859,35 @@ function searchRegistration(){
     }
   });
 }
+
+
+// handles random images on login and register blades
+// $(document).ready(function(){
+//    //execute code here
+
+//     var myImages = new Array("mb1.jpeg", "mb2.jpeg", "mb3.jpeg", "mb4.jpeg", "mb5.jpeg", "mb6.jpeg", "carlot.jpeg", "vw1.jpeg", "vw_tower.jpeg");
+
+//     $(document).ready(function() {
+//         var random = myImages[Math.floor(Math.random() * myImages.length)];
+//         random = 'url(/object-mapper/public/assets/bg_images/' + random + ')';
+//         $('.background-image').css('background-image', random);
+
+//         setInterval(function() {
+//             SetImage();
+//         }, 12000);
+//     });
+
+//     function SetImage() {
+//         var random = myImages[Math.floor(Math.random() * myImages.length)];
+
+//         random = 'url(/object-mapper/public/assets/bg_images/' + random + ')';
+//         $('.background-image').fadeOut(0);
+
+//         setTimeout(function () {
+//             $('.background-image').css('background-image', random);
+//             $('.background-image').fadeIn(0);
+//         }, 0);
+//     }
+// });
+
+

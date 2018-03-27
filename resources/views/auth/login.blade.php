@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<body class="background-image" id="background-image">
+  <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -18,9 +19,9 @@
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
@@ -32,9 +33,9 @@
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
@@ -66,4 +67,5 @@
         </div>
     </div>
 </div>
+</body>
 @endsection
