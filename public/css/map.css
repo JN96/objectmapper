@@ -1,0 +1,41 @@
+#map {
+	height: 60%;
+}
+
+#vehicles_list, #search_vehicles_list{
+	height: 66%;
+	overflow-y: auto;
+}
+
+.infoDiv{
+	height: 100%;
+	width: 100%;
+	/*	overflow-y: auto;
+	overflow-x: hidden;*/
+	line-height: 1.35;
+	overflow: hidden;
+	white-space: nowrap;
+	overflow-x:hidden!important;
+}
+
+.formDetails{
+	height: 150px
+	/*	overflow-y: auto;
+	overflow-x: hidden;*/
+	line-height: 1.35;
+	overflow: hidden;
+	white-space: nowrap;
+	overflow-x:hidden!important;
+}
+
+.linkButton{
+   background:none!important;
+     border:none; 
+     padding:0!important;
+    
+    /*optional*/
+    font-family:arial,sans-serif; /*input has OS specific font-family*/
+     color:#069;
+     text-decoration:underline;
+     cursor:pointer;
+}
