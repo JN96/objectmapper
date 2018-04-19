@@ -9,8 +9,6 @@ var blue_MarkerV = "/object-mapper/public/assets/blue_MarkerV.png";
 var pink_MarkerM = "/object-mapper/public/assets/pink_MarkerM.png";
 var yellow_MarkerA = "/object-mapper/public/assets/yellow_MarkerA.png";
 
-// map overlay example
-var historicalOverLay;
 
 
 function initMap() {
@@ -31,23 +29,9 @@ var imageBounds = {
 
 };
 
-// map overlay example
-historicalOverlay = new google.maps.GroundOverlay(
-  'https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg', imageBounds);
-historicalOverlay.setMap(map);
-
-
 
 infoWindow = new google.maps.InfoWindow();
 
-  // searchButton = document.getElementById("searchButton").onclick = searchMarkers();
-  // locationSelect = document.getElementById("locationSelect");
-  // locationSelect.onchange = function() {
-  //   var markerNum = locationSelect.options[locationSelect.selectedIndex].value;
-  //   if (markerNum != "none"){
-  //     google.maps.event.trigger(markers[markerNum], 'click');
-  //   }
-  // };
 
   infowindow = new google.maps.InfoWindow({
     content: document.getElementById('form')
@@ -160,8 +144,6 @@ function editMarker(){
       var lat = $(this).find('.lat').text(); 
       var lng = $(this).find('.lng').text(); 
 
-
-
     });
 
     var editId = escape(document.getElementById('editId').value = id);
@@ -171,6 +153,7 @@ function editMarker(){
     var editPrice = escape(document.getElementById('editPrice').value = price);
     var editRegistration = escape(document.getElementById('editRegistration').value = registration);
     var editDescription = escape(document.getElementById('editDescription').value = description);
+    // $("#editDescription").val(description);
     var editLat = escape(document.getElementById('editLat').value = lat);
     var editLng = escape(document.getElementById('editLng').value = lng);
 
@@ -483,11 +466,7 @@ function searchMarkers() {
       //Handle Data
       console.log(data);
       var data = JSON.parse(data);
-      // if (data <= 0) {
-      //   alert("Vehicle does not exist.");
-      //   displayMarkers();
-      //   $('#search_vehicles_list').hide();
-      // }
+
       $.each(data , function(key,value){
 
         if (value.manufacturer === "Audi") {
@@ -859,35 +838,3 @@ function searchRegistration(){
     }
   });
 }
-
-
-// handles random images on login and register blades
-// $(document).ready(function(){
-//    //execute code here
-
-//     var myImages = new Array("mb1.jpeg", "mb2.jpeg", "mb3.jpeg", "mb4.jpeg", "mb5.jpeg", "mb6.jpeg", "carlot.jpeg", "vw1.jpeg", "vw_tower.jpeg");
-
-//     $(document).ready(function() {
-//         var random = myImages[Math.floor(Math.random() * myImages.length)];
-//         random = 'url(/object-mapper/public/assets/bg_images/' + random + ')';
-//         $('.background-image').css('background-image', random);
-
-//         setInterval(function() {
-//             SetImage();
-//         }, 12000);
-//     });
-
-//     function SetImage() {
-//         var random = myImages[Math.floor(Math.random() * myImages.length)];
-
-//         random = 'url(/object-mapper/public/assets/bg_images/' + random + ')';
-//         $('.background-image').fadeOut(0);
-
-//         setTimeout(function () {
-//             $('.background-image').css('background-image', random);
-//             $('.background-image').fadeIn(0);
-//         }, 0);
-//     }
-// });
-
-
