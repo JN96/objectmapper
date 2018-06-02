@@ -42,7 +42,7 @@
 
 .background-image{
 	/*/object-mapper/public/assets/bg_images/mb2.jpg*/
-	background: url("/object-mapper/public/assets/bg_images/mb2.jpeg");
+	background: url("/objectmapper/public/assets/bg_images/mb2.jpeg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	opacity: 1;

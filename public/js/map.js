@@ -4,10 +4,10 @@ var infowindow;
 var messagewindow;
 var locationSelect;
 var markersArray = [];
-var darkgreen_MarkerS = "/object-mapper/public/assets/darkgreen_MarkerS.png";
-var blue_MarkerV = "/object-mapper/public/assets/blue_MarkerV.png";
-var pink_MarkerM = "/object-mapper/public/assets/pink_MarkerM.png";
-var yellow_MarkerA = "/object-mapper/public/assets/yellow_MarkerA.png";
+var darkgreen_MarkerS = "/objectmapper/public/assets/darkgreen_MarkerS.png";
+var blue_MarkerV = "/objectmapper/public/assets/blue_MarkerV.png";
+var pink_MarkerM = "/objectmapper/public/assets/pink_MarkerM.png";
+var yellow_MarkerA = "/objectmapper/public/assets/yellow_MarkerA.png";
 
 
 
@@ -206,9 +206,10 @@ function displayMarkers(){
   $('#search_vehicles_list').hide();
   $('#clearButton').remove();
   $.ajax({
-    url:"/object-mapper/public/showMapMarkers",
+    url:"/objectmapper/public/showMapMarkers",
     type:"GET",
     success:function(data){
+      console.log(data);
       var data = JSON.parse(data);
       $.each(data , function(key,value){
 
@@ -266,10 +267,10 @@ function displayMarkers(){
       +'<h4 class="registration">' + value.registration + '</h4>'
       + "<h4 class='lat' hidden>" + value.lat + "</h4>" 
       + "<h4 class='lng' hidden>" + value.lng + "</h4>"
-      + '<form id="deleteForm" class="deleteForm" action="/object-mapper/public/destroy/'+value.id
+      + '<form id="deleteForm" class="deleteForm" action="/objectmapper/public/destroy/'+value.id
       +'" method="DELETE">' 
       + '<input type="submit" value="Delete"</input>' 
-      + '</form><form action="/object-mapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
+      + '</form><form action="/objectmapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
 
     });    
 
@@ -350,7 +351,7 @@ error:function(data){
 /* returns selected from list on the map*/
 function linkMarkers(id){
   $.ajax({
-    url:"/object-mapper/public/linkMarkers/"+id,
+    url:"/objectmapper/public/linkMarkers/"+id,
     type:"GET",
     success:function(data){
         // $('#searchButton').remove();
@@ -412,10 +413,10 @@ function linkMarkers(id){
             +'<h4 class="registration">' + value.registration + '</h4>'
             + "<h4 class='lat' hidden>" + value.lat + "</h4>" 
             + "<h4 class='lng' hidden>" + value.lng + "</h4>"
-            + '<form id="deleteForm" class="deleteForm" action="/object-mapper/public/destroy/'+value.id
+            + '<form id="deleteForm" class="deleteForm" action="/objectmapper/public/destroy/'+value.id
             +'" method="DELETE">' 
             + '<input type="submit" value="Delete"</input>' 
-            + '</form><form action="/object-mapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
+            + '</form><form action="/objectmapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
 
           });   
 
@@ -456,7 +457,7 @@ function searchMarkers() {
   //  for the chosen manufacturer
   if (model === "All") {
    $.ajax({
-    url:"/object-mapper/public/searcManufacturerhMarkers/"+manufacturer,
+    url:"/objectmapper/public/searcManufacturerhMarkers/"+manufacturer,
     type:"GET",
     success:function(data){
       $("#clearButton").remove();  
@@ -523,10 +524,10 @@ function searchMarkers() {
           +'<h4 class="registration">' + value.registration + '</h4>'
           + "<h4 class='lat' hidden>" + value.lat + "</h4>" 
           + "<h4 class='lng' hidden>" + value.lng + "</h4>"
-          + '<form id="deleteForm" class="deleteForm" action="/object-mapper/public/destroy/'+value.id
+          + '<form id="deleteForm" class="deleteForm" action="/objectmapper/public/destroy/'+value.id
           +'" method="DELETE">' 
           + '<input type="submit" value="Delete"</input>' 
-          + '</form><form action="/object-mapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
+          + '</form><form action="/objectmapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
 
         });   
 
@@ -579,7 +580,7 @@ function searchMarkers() {
  //  else if model is not set to "All", the chosen model will be displayed on the map  
  else{  
   $.ajax({
-    url:"/object-mapper/public/searchMarkers/"+manufacturer+"/"+model,
+    url:"/objectmapper/public/searchMarkers/"+manufacturer+"/"+model,
     type:"GET",
     success:function(data){
       $("#clearButton").remove();  
@@ -652,10 +653,10 @@ function searchMarkers() {
           +'<h4 class="registration">' + value.registration + '</h4>'
           + "<h4 class='lat' hidden>" + value.lat + "</h4>" 
           + "<h4 class='lng' hidden>" + value.lng + "</h4>"
-          + '<form id="deleteForm" class="deleteForm" action="/object-mapper/public/destroy/'+value.id
+          + '<form id="deleteForm" class="deleteForm" action="/objectmapper/public/destroy/'+value.id
           +'" method="DELETE">' 
           + '<input type="submit" value="Delete"</input>' 
-          + '</form><form action="/object-mapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
+          + '</form><form action="/objectmapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
 
         });   
 
@@ -711,7 +712,7 @@ function searchRegistration(){
   var registration = document.getElementById("regSearchInput").value;
   console.log(registration);
   $.ajax({
-    url:"/object-mapper/public/searchRegistration/"+registration,
+    url:"/objectmapper/public/searchRegistration/"+registration,
     type:"GET",
     success:function(data){
       $("#clearButton").remove();  
@@ -784,10 +785,10 @@ function searchRegistration(){
           +'<h4 class="registration">' + value.registration + '</h4>'
           + "<h4 class='lat' hidden>" + value.lat + "</h4>" 
           + "<h4 class='lng' hidden>" + value.lng + "</h4>"
-          + '<form id="deleteForm" class="deleteForm" action="/object-mapper/public/destroy/'+value.id
+          + '<form id="deleteForm" class="deleteForm" action="/objectmapper/public/destroy/'+value.id
           +'" method="DELETE">' 
           + '<input type="submit" value="Delete"</input>' 
-          + '</form><form action="/object-mapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
+          + '</form><form action="/objectmapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
 
         });   
 
