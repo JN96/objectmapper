@@ -170,64 +170,7 @@
                                     </table>
                                 </form>
                             </div><br>
-                            @if($marker != "")
-
-
-
-
-                            <div id="editForm">
-                                <form class="form-horizontal" action="/object-mapper/public/editMarker/{{ $marker->id }}" method="POST">
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2">Manufacturer:</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="editManufacturer" name="editManufacturer" placeholder="Enter manufacturer" value="{{ $marker->manufacturer }}" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2">Model:</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="editModel" name="editModel" placeholder="Enter model" value="{{ $marker->model }}" required>
-                                        </div>
-                                    </div>                           
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2">Year:</label>
-                                        <div class="col-sm-10">
-                                          <input type="text" class="form-control" id="editYear" name="editYear" placeholder="Enter year" value="{{ $marker->year }}" required>
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label class="control-label col-sm-2">Price:</label>
-                                    <div class="col-sm-10">
-                                      <input type="text" class="form-control" id="editPrice" name="editPrice" placeholder="Enter price" value="{{ $marker->price }}" required>
-                                  </div>
-                              </div>    
-                              <div class="form-group">
-                                <label class="control-label col-sm-2">Registration:</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="editRegistration" name="editRegistration" placeholder="Enter registration" value="{{ $marker->registration }}" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="control-label col-sm-2">Description:</label>
-                            <div class="col-sm-10">
-                              <textarea type="text" class="form-control" id="editDescription" name="editDescription" placeholder="Enter description" value="{{ $marker->description }}" required>{{ $marker->description }}</textarea>
-                          </div>
-                      </div>
-                      <input type="" class="form-control" name="editLat" value="{{ $marker->lat }}" id="editLat">
-                      <input type="" class="form-control" name="editLng" value="{{ $marker->lng }}" id="editLng">
-                      <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button id="editSubmit" type="submit" class="btn btn-sm btn-primary">Submit</button>
-                        </div>
-                    </div>
-                    {{ csrf_field() }}
-                </form> 
-            </div>
-
-
-
-
-            @endif 
+                            <input type="hidden" id="csrf_token" value="{{ csrf_token() }}"/>
             <!-- <div id="message">Location saved</div> -->
             <div><select id="locationSelect" style="width: 10%; visibility: hidden"></select></div>
 
@@ -237,13 +180,13 @@
 
         <!-- list of vehicles in column 2 -->
         <div class="col-md-3">
-           <br>
-           <h4>List of vehicles</h4>
-           <div class="" id="vehicles_list"></div>
-           <div class="" id="search_vehicles_list"></div>
-       </div>
-   </div>
-   <div class="row">  
+         <br>
+         <h4>List of vehicles</h4>
+         <div class="" id="vehicles_list"></div>
+         <div class="" id="search_vehicles_list"></div>
+     </div>
+ </div>
+ <div class="row">  
     @yield('section')
 </div>
 <!-- /#page-wrapper -->

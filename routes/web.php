@@ -30,8 +30,7 @@ Route::get('/searchMarkers/{manufacturer}/{model}', 'MarkerController@searchMark
 Route::get('/searcManufacturerhMarkers/{manufacturer}', 'MarkerController@searcManufacturerhMarkers');
 Route::get('/searchRegistration/{registration}', 'MarkerController@searchRegistration');
 Route::get('/linkMarkers/{id}', 'MarkerController@linkMarkers');
-Route::post('/editMarker/{id}', 'MarkerController@update');
-Route::get('/getMarker/{id}', 'MarkerController@getMarker');
+Route::post('/update/{id}', 'MarkerController@update');
 Route::resource('markers', 'MarkerController');
 
 // account routes

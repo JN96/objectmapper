@@ -33,13 +33,13 @@ var imageBounds = {
 infoWindow = new google.maps.InfoWindow();
 
 
-  infowindow = new google.maps.InfoWindow({
-    content: document.getElementById('form')
-  });
+infowindow = new google.maps.InfoWindow({
+  content: document.getElementById('form')
+});
 
-  messagewindow = new google.maps.InfoWindow({
-    content: document.getElementById('message')
-  });
+messagewindow = new google.maps.InfoWindow({
+  content: document.getElementById('message')
+});
 
 // Handles plotting initial marker on click. If marker is present and map is clicked again,
 // marker will be removed and appear at the next clicked location
@@ -126,6 +126,19 @@ function hideMarkers(markers) {
   }
 }
 
+// handles the toggling of the edit form and information displayed
+function toggleEdit(){
+// var test="<div id='testEditForm'><p>this is a test</p></div>";
+$(document).ready(function() {
+  // document.getElementById('testEditForm').removeAttribute("style");
+  console.log("works");
+  console.log("div length: " + $("#testEditForm").length);
+  $('#windowContent').add('#testEditForm').toggle(0);
+});
+}
+
+
+
 
 // edit marker
 function editMarker(){
@@ -153,7 +166,6 @@ function editMarker(){
     var editPrice = escape(document.getElementById('editPrice').value = price);
     var editRegistration = escape(document.getElementById('editRegistration').value = registration);
     var editDescription = escape(document.getElementById('editDescription').value = description);
-    // $("#editDescription").val(description);
     var editLat = escape(document.getElementById('editLat').value = lat);
     var editLng = escape(document.getElementById('editLng').value = lng);
 
@@ -258,8 +270,10 @@ function displayMarkers(){
         });
     }
 
+    csrf_token = document.getElementById('csrf_token');
+
     var infoWindow = new google.maps.InfoWindow({
-      content: '<div id="infoDiv" class="infoDiv"><h4 class="id" hidden>'+ value.id +'</h4>'
+      content: '<div id="windowContent" class="windowContent"><div id="infoDiv" class="infoDiv"><h4 class="id" hidden>'+ value.id +'</h4>'
       +'<h4 class="manufacturer">' + value.manufacturer + '</h4>' 
       + '<h4 class="model">' + value.model + '</h4>' 
       + '<h4 class="year">' + value.year + '</h4>' 
@@ -270,9 +284,30 @@ function displayMarkers(){
       + '<form id="deleteForm" class="deleteForm" action="/objectmapper/public/destroy/'+value.id
       +'" method="DELETE">' 
       + '<input type="submit" value="Delete"</input>' 
-      + '</form><form action="/objectmapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
+      + '</form>' +'</h4></div>'
+      + '<input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input>'
+      + '</div>'
+      + '</div>'
+      + '<div id="testEditForm" class="testEditForm" style="display: none">'
+      + '<form id="editForm" action="/objectmapper/public/update/'+value.id+'" method="POST">'
+      + '<table class="table-responsive">'
+      + '<h4 class="editId" hidden>'+ value.id +'</h4>'
+      + '<tr><td><input name="editManufacturer" class="editManufacturer" value="' + value.manufacturer + '"></input></td></tr>'
+      + '<tr><td><input name="editModel" class="editModel" value="' + value.model + '"></input></td></tr>'
+      + '<tr><td><input name="editYear" class="editYear" value="' + value.year + '"></input></td></tr>'
+      + '<tr><td><input name="editPrice" class="editPrice" value="' + value.price + '"></input></td></tr>'
+      + '<tr><td><input name="editRegistration" class="editRegistration" value="' + value.registration + '"></input></td></tr>'
+      + '<tr><td><textarea type="text" class="editDescription" name="editDescription">' + value.description +'></textarea></td></tr>'
+      + '<tr><td><input name="editLat" class="editLat" value="' + value.lat + '"></input></td></tr>'
+      + '<tr><td><input name="editLng" class="editLng" value="' + value.lng + '"></input></td></tr>'
+      + '<tr><td><input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input></td></tr>'  
+      + '<tr><td><input type="submit" id="updateButton" value="Update"</input></td></tr>'  
+      + '</table>'
+      + '<input type="hidden" name="_token" value="'+csrf_token.value+'"></input>'
+      + '</form>'  
+      + '</div>'
 
-    });    
+    });
 
         // var tooltip = new google.maps.InfoWindow({
         //   content: '<div id="infoDiv" class="infoDiv"><h4 class="registration" hidden>'+ value.registration +'</h4></div>'
@@ -405,20 +440,41 @@ function linkMarkers(id){
           }
 
           var infoWindow = new google.maps.InfoWindow({
-            content: '<div id="infoDiv" class="infoDiv"><h4 class="id" hidden>'+ value.id +'</h4>'
-            +'<h4 class="manufacturer">' + value.manufacturer + '</h4>' 
-            + '<h4 class="model">' + value.model + '</h4>' 
-            + '<h4 class="year">' + value.year + '</h4>' 
-            + '<h4 class="price">' + value.price + '</h4>' 
-            +'<h4 class="registration">' + value.registration + '</h4>'
-            + "<h4 class='lat' hidden>" + value.lat + "</h4>" 
-            + "<h4 class='lng' hidden>" + value.lng + "</h4>"
-            + '<form id="deleteForm" class="deleteForm" action="/objectmapper/public/destroy/'+value.id
-            +'" method="DELETE">' 
-            + '<input type="submit" value="Delete"</input>' 
-            + '</form><form action="/objectmapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
+           content: '<div id="windowContent" class="windowContent"><div id="infoDiv" class="infoDiv"><h4 class="id" hidden>'+ value.id +'</h4>'
+           +'<h4 class="manufacturer">' + value.manufacturer + '</h4>' 
+           + '<h4 class="model">' + value.model + '</h4>' 
+           + '<h4 class="year">' + value.year + '</h4>' 
+           + '<h4 class="price">' + value.price + '</h4>' 
+           +'<h4 class="registration">' + value.registration + '</h4>'
+           + "<h4 class='lat' hidden>" + value.lat + "</h4>" 
+           + "<h4 class='lng' hidden>" + value.lng + "</h4>"
+           + '<form id="deleteForm" class="deleteForm" action="/objectmapper/public/destroy/'+value.id
+           +'" method="DELETE">' 
+           + '<input type="submit" value="Delete"</input>' 
+           + '</form>' +'</h4></div>'
+           + '<input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input>'
+           + '</div>'
+           + '</div>'
+           + '<div id="testEditForm" class="testEditForm" style="display: none">'
+           + '<form id="editForm" action="/objectmapper/public/update/'+value.id+'" method="POST">'
+           + '<table class="table-responsive">'
+           + '<h4 class="editId" hidden>'+ value.id +'</h4>'
+           + '<tr><td><input name="editManufacturer" class="editManufacturer" value="' + value.manufacturer + '"></input></td></tr>'
+           + '<tr><td><input name="editModel" class="editModel" value="' + value.model + '"></input></td></tr>'
+           + '<tr><td><input name="editYear" class="editYear" value="' + value.year + '"></input></td></tr>'
+           + '<tr><td><input name="editPrice" class="editPrice" value="' + value.price + '"></input></td></tr>'
+           + '<tr><td><input name="editRegistration" class="editRegistration" value="' + value.registration + '"></input></td></tr>'
+           + '<tr><td><textarea type="text" class="editDescription" name="editDescription">' + value.description +'></textarea></td></tr>'
+           + '<tr><td><input name="editLat" class="editLat" value="' + value.lat + '"></input></td></tr>'
+           + '<tr><td><input name="editLng" class="editLng" value="' + value.lng + '"></input></td></tr>'
+           + '<tr><td><input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input></td></tr>'  
+           + '<tr><td><input type="submit" id="updateButton" value="Update"</input></td></tr>'  
+           + '</table>'
+           + '<input type="hidden" name="_token" value="'+csrf_token.value+'"></input>'
+           + '</form>'  
+           + '</div>'
 
-          });   
+         });   
 
           // infoWindow.open(map, marker);           
           map.setCenter(marker.getPosition());
@@ -436,11 +492,11 @@ function linkMarkers(id){
           markersArray.push(marker);
 
         });
-      },
-      error:function(data){
-        alert('Failed');
-      }
-    });
+},
+error:function(data){
+  alert('Failed');
+}
+});
 }
 
 
@@ -516,20 +572,41 @@ function searchMarkers() {
 
 
         var infoWindow = new google.maps.InfoWindow({
-          content: '<div id="infoDiv" class="infoDiv"><h4 class="id" hidden>'+ value.id +'</h4>'
-          +'<h4 class="manufacturer">' + value.manufacturer + '</h4>' 
-          + '<h4 class="model">' + value.model + '</h4>' 
-          + '<h4 class="year">' + value.year + '</h4>' 
-          + '<h4 class="price">' + value.price + '</h4>' 
-          +'<h4 class="registration">' + value.registration + '</h4>'
-          + "<h4 class='lat' hidden>" + value.lat + "</h4>" 
-          + "<h4 class='lng' hidden>" + value.lng + "</h4>"
-          + '<form id="deleteForm" class="deleteForm" action="/objectmapper/public/destroy/'+value.id
-          +'" method="DELETE">' 
-          + '<input type="submit" value="Delete"</input>' 
-          + '</form><form action="/objectmapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
+         content: '<div id="windowContent" class="windowContent"><div id="infoDiv" class="infoDiv"><h4 class="id" hidden>'+ value.id +'</h4>'
+         +'<h4 class="manufacturer">' + value.manufacturer + '</h4>' 
+         + '<h4 class="model">' + value.model + '</h4>' 
+         + '<h4 class="year">' + value.year + '</h4>' 
+         + '<h4 class="price">' + value.price + '</h4>' 
+         +'<h4 class="registration">' + value.registration + '</h4>'
+         + "<h4 class='lat' hidden>" + value.lat + "</h4>" 
+         + "<h4 class='lng' hidden>" + value.lng + "</h4>"
+         + '<form id="deleteForm" class="deleteForm" action="/objectmapper/public/destroy/'+value.id
+         +'" method="DELETE">' 
+         + '<input type="submit" value="Delete"</input>' 
+         + '</form>' +'</h4></div>'
+         + '<input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input>'
+         + '</div>'
+         + '</div>'
+         + '<div id="testEditForm" class="testEditForm" style="display: none">'
+         + '<form id="editForm" action="/objectmapper/public/update/'+value.id+'" method="POST">'
+         + '<table class="table-responsive">'
+         + '<h4 class="editId" hidden>'+ value.id +'</h4>'
+         + '<tr><td><input name="editManufacturer" class="editManufacturer" value="' + value.manufacturer + '"></input></td></tr>'
+         + '<tr><td><input name="editModel" class="editModel" value="' + value.model + '"></input></td></tr>'
+         + '<tr><td><input name="editYear" class="editYear" value="' + value.year + '"></input></td></tr>'
+         + '<tr><td><input name="editPrice" class="editPrice" value="' + value.price + '"></input></td></tr>'
+         + '<tr><td><input name="editRegistration" class="editRegistration" value="' + value.registration + '"></input></td></tr>'
+         + '<tr><td><textarea type="text" class="editDescription" name="editDescription">' + value.description +'></textarea></td></tr>'
+         + '<tr><td><input name="editLat" class="editLat" value="' + value.lat + '"></input></td></tr>'
+         + '<tr><td><input name="editLng" class="editLng" value="' + value.lng + '"></input></td></tr>'
+         + '<tr><td><input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input></td></tr>'  
+         + '<tr><td><input type="submit" id="updateButton" value="Update"</input></td></tr>'  
+         + '</table>'
+         + '<input type="hidden" name="_token" value="'+csrf_token.value+'"></input>'
+         + '</form>'  
+         + '</div>'
 
-        });   
+       });   
 
         google.maps.event.addListener(marker, 'click', function() {
           infoWindow.open(map, marker);
@@ -645,20 +722,41 @@ function searchMarkers() {
 
 
         var infoWindow = new google.maps.InfoWindow({
-          content: '<div id="infoDiv" class="infoDiv"><h4 class="id" hidden>'+ value.id +'</h4>'
-          +'<h4 class="manufacturer">' + value.manufacturer + '</h4>' 
-          + '<h4 class="model">' + value.model + '</h4>' 
-          + '<h4 class="year">' + value.year + '</h4>' 
-          + '<h4 class="price">' + value.price + '</h4>' 
-          +'<h4 class="registration">' + value.registration + '</h4>'
-          + "<h4 class='lat' hidden>" + value.lat + "</h4>" 
-          + "<h4 class='lng' hidden>" + value.lng + "</h4>"
-          + '<form id="deleteForm" class="deleteForm" action="/objectmapper/public/destroy/'+value.id
-          +'" method="DELETE">' 
-          + '<input type="submit" value="Delete"</input>' 
-          + '</form><form action="/objectmapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
+         content: '<div id="windowContent" class="windowContent"><div id="infoDiv" class="infoDiv"><h4 class="id" hidden>'+ value.id +'</h4>'
+         +'<h4 class="manufacturer">' + value.manufacturer + '</h4>' 
+         + '<h4 class="model">' + value.model + '</h4>' 
+         + '<h4 class="year">' + value.year + '</h4>' 
+         + '<h4 class="price">' + value.price + '</h4>' 
+         +'<h4 class="registration">' + value.registration + '</h4>'
+         + "<h4 class='lat' hidden>" + value.lat + "</h4>" 
+         + "<h4 class='lng' hidden>" + value.lng + "</h4>"
+         + '<form id="deleteForm" class="deleteForm" action="/objectmapper/public/destroy/'+value.id
+         +'" method="DELETE">' 
+         + '<input type="submit" value="Delete"</input>' 
+         + '</form>' +'</h4></div>'
+         + '<input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input>'
+         + '</div>'
+         + '</div>'
+         + '<div id="testEditForm" class="testEditForm" style="display: none">'
+         + '<form id="editForm" action="/objectmapper/public/update/'+value.id+'" method="POST">'
+         + '<table class="table-responsive">'
+         + '<h4 class="editId" hidden>'+ value.id +'</h4>'
+         + '<tr><td><input name="editManufacturer" class="editManufacturer" value="' + value.manufacturer + '"></input></td></tr>'
+         + '<tr><td><input name="editModel" class="editModel" value="' + value.model + '"></input></td></tr>'
+         + '<tr><td><input name="editYear" class="editYear" value="' + value.year + '"></input></td></tr>'
+         + '<tr><td><input name="editPrice" class="editPrice" value="' + value.price + '"></input></td></tr>'
+         + '<tr><td><input name="editRegistration" class="editRegistration" value="' + value.registration + '"></input></td></tr>'
+         + '<tr><td><textarea type="text" class="editDescription" name="editDescription">' + value.description +'></textarea></td></tr>'
+         + '<tr><td><input name="editLat" class="editLat" value="' + value.lat + '"></input></td></tr>'
+         + '<tr><td><input name="editLng" class="editLng" value="' + value.lng + '"></input></td></tr>'
+         + '<tr><td><input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input></td></tr>'  
+         + '<tr><td><input type="submit" id="updateButton" value="Update"</input></td></tr>'  
+         + '</table>'
+         + '<input type="hidden" name="_token" value="'+csrf_token.value+'"></input>'
+         + '</form>'  
+         + '</div>'
 
-        });   
+       });   
 
         google.maps.event.addListener(marker, 'click', function() {
           infoWindow.open(map, marker);
@@ -777,7 +875,7 @@ function searchRegistration(){
 
 
         var infoWindow = new google.maps.InfoWindow({
-          content: '<div id="infoDiv" class="infoDiv"><h4 class="id" hidden>'+ value.id +'</h4>'
+          content: '<div id="windowContent" class="windowContent"><div id="infoDiv" class="infoDiv"><h4 class="id" hidden>'+ value.id +'</h4>'
           +'<h4 class="manufacturer">' + value.manufacturer + '</h4>' 
           + '<h4 class="model">' + value.model + '</h4>' 
           + '<h4 class="year">' + value.year + '</h4>' 
@@ -788,8 +886,29 @@ function searchRegistration(){
           + '<form id="deleteForm" class="deleteForm" action="/objectmapper/public/destroy/'+value.id
           +'" method="DELETE">' 
           + '<input type="submit" value="Delete"</input>' 
-          + '</form><form action="/objectmapper/public/getMarker/'+value.id+'" method="GET"><input type="submit"  value="Edit"></input></form>' +'</h4></div>',
-
+          + '</form>' +'</h4></div>'
+          + '<input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input>'
+          + '</div>'
+          + '</div>'
+          + '<div id="testEditForm" class="testEditForm" style="display: none">'
+          + '<form id="editForm" action="/objectmapper/public/update/'+value.id+'" method="POST">'
+          + '<table class="table-responsive">'
+          + '<h4 class="editId" hidden>'+ value.id +'</h4>'
+          + '<tr><td><input name="editManufacturer" class="editManufacturer" value="' + value.manufacturer + '"></input></td></tr>'
+          + '<tr><td><input name="editModel" class="editModel" value="' + value.model + '"></input></td></tr>'
+          + '<tr><td><input name="editYear" class="editYear" value="' + value.year + '"></input></td></tr>'
+          + '<tr><td><input name="editPrice" class="editPrice" value="' + value.price + '"></input></td></tr>'
+          + '<tr><td><input name="editRegistration" class="editRegistration" value="' + value.registration + '"></input></td></tr>'
+          + '<tr><td><textarea type="text" class="editDescription" name="editDescription">' + value.description +'></textarea></td></tr>'
+          + '<tr><td><input name="editLat" class="editLat" value="' + value.lat + '"></input></td></tr>'
+          + '<tr><td><input name="editLng" class="editLng" value="' + value.lng + '"></input></td></tr>'
+          + '<tr><td><input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input></td></tr>'  
+          + '<tr><td><input type="submit" id="updateButton" value="Update"</input></td></tr>'  
+          + '</table>'
+          + '<input type="hidden" name="_token" value="'+csrf_token.value+'"></input>'
+          + '</form>'  
+          + '</div>'
+          
         });   
 
         google.maps.event.addListener(marker, 'click', function() {

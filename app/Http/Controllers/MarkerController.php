@@ -68,6 +68,7 @@ class MarkerController extends Controller
             'model' => $data['model'],
             'year' => $data['year'],
             'registration' => $data['registration'],
+            'description' => $data['description'],
             'lat' => $data['lat'],
             'lng' => $data['lng'],
 
@@ -86,9 +87,9 @@ class MarkerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+ 
     }
 
     /**
@@ -116,15 +117,6 @@ class MarkerController extends Controller
 
         Session::flash('message', 'Successfully updated marker');
         return redirect()->route('dashboard');
-    }
-
-
-// gets id before form submission
-    public function getMarker($id){
-        $marker = Marker::find($id);
-
-        return view('dashboard')->with("marker" , $marker);
-
     }
 
     /**
