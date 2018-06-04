@@ -297,7 +297,7 @@ function displayMarkers(){
       + '<tr><td><input name="editYear" class="editYear" value="' + value.year + '"></input></td></tr>'
       + '<tr><td><input name="editPrice" class="editPrice" value="' + value.price + '"></input></td></tr>'
       + '<tr><td><input name="editRegistration" class="editRegistration" value="' + value.registration + '"></input></td></tr>'
-      + '<tr><td><textarea type="text" class="editDescription" name="editDescription">' + value.description +'></textarea></td></tr>'
+      + '<tr><td><textarea type="text" class="editDescription" name="editDescription">"' + value.description +'"></textarea></td></tr>'
       + '<tr><td><input name="editLat" class="editLat" value="' + value.lat + '"></input></td></tr>'
       + '<tr><td><input name="editLng" class="editLng" value="' + value.lng + '"></input></td></tr>'
       + '<tr><td><input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input></td></tr>'  
@@ -464,7 +464,7 @@ function linkMarkers(id){
            + '<tr><td><input name="editYear" class="editYear" value="' + value.year + '"></input></td></tr>'
            + '<tr><td><input name="editPrice" class="editPrice" value="' + value.price + '"></input></td></tr>'
            + '<tr><td><input name="editRegistration" class="editRegistration" value="' + value.registration + '"></input></td></tr>'
-           + '<tr><td><textarea type="text" class="editDescription" name="editDescription">' + value.description +'></textarea></td></tr>'
+                 + '<tr><td><textarea type="text" class="editDescription" name="editDescription">"' + value.description +'"></textarea></td></tr>'
            + '<tr><td><input name="editLat" class="editLat" value="' + value.lat + '"></input></td></tr>'
            + '<tr><td><input name="editLng" class="editLng" value="' + value.lng + '"></input></td></tr>'
            + '<tr><td><input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input></td></tr>'  
@@ -596,7 +596,7 @@ function searchMarkers() {
          + '<tr><td><input name="editYear" class="editYear" value="' + value.year + '"></input></td></tr>'
          + '<tr><td><input name="editPrice" class="editPrice" value="' + value.price + '"></input></td></tr>'
          + '<tr><td><input name="editRegistration" class="editRegistration" value="' + value.registration + '"></input></td></tr>'
-         + '<tr><td><textarea type="text" class="editDescription" name="editDescription">' + value.description +'></textarea></td></tr>'
+               + '<tr><td><textarea type="text" class="editDescription" name="editDescription">"' + value.description +'"></textarea></td></tr>'
          + '<tr><td><input name="editLat" class="editLat" value="' + value.lat + '"></input></td></tr>'
          + '<tr><td><input name="editLng" class="editLng" value="' + value.lng + '"></input></td></tr>'
          + '<tr><td><input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input></td></tr>'  
@@ -746,7 +746,7 @@ function searchMarkers() {
          + '<tr><td><input name="editYear" class="editYear" value="' + value.year + '"></input></td></tr>'
          + '<tr><td><input name="editPrice" class="editPrice" value="' + value.price + '"></input></td></tr>'
          + '<tr><td><input name="editRegistration" class="editRegistration" value="' + value.registration + '"></input></td></tr>'
-         + '<tr><td><textarea type="text" class="editDescription" name="editDescription">' + value.description +'></textarea></td></tr>'
+               + '<tr><td><textarea type="text" class="editDescription" name="editDescription">"' + value.description +'"></textarea></td></tr>'
          + '<tr><td><input name="editLat" class="editLat" value="' + value.lat + '"></input></td></tr>'
          + '<tr><td><input name="editLng" class="editLng" value="' + value.lng + '"></input></td></tr>'
          + '<tr><td><input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input></td></tr>'  
@@ -899,7 +899,7 @@ function searchRegistration(){
           + '<tr><td><input name="editYear" class="editYear" value="' + value.year + '"></input></td></tr>'
           + '<tr><td><input name="editPrice" class="editPrice" value="' + value.price + '"></input></td></tr>'
           + '<tr><td><input name="editRegistration" class="editRegistration" value="' + value.registration + '"></input></td></tr>'
-          + '<tr><td><textarea type="text" class="editDescription" name="editDescription">' + value.description +'></textarea></td></tr>'
+      + '<tr><td><textarea type="text" class="editDescription" name="editDescription">"' + value.description +'"></textarea></td></tr>'
           + '<tr><td><input name="editLat" class="editLat" value="' + value.lat + '"></input></td></tr>'
           + '<tr><td><input name="editLng" class="editLng" value="' + value.lng + '"></input></td></tr>'
           + '<tr><td><input type="button" id="toggleEditButton" value="Toggle Edit" onclick="toggleEdit()"</input></td></tr>'  
@@ -908,7 +908,7 @@ function searchRegistration(){
           + '<input type="hidden" name="_token" value="'+csrf_token.value+'"></input>'
           + '</form>'  
           + '</div>'
-          
+
         });   
 
         google.maps.event.addListener(marker, 'click', function() {
