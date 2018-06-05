@@ -20,16 +20,6 @@ function initMap() {
     mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU}
   });
 
-//  map overlay exxample
-var imageBounds = {
-  north: 40.773941,
-  south: 40.712216,
-  east: -74.12544,
-  west: -74.22655
-
-};
-
-
 infoWindow = new google.maps.InfoWindow();
 
 
