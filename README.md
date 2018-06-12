@@ -1,4 +1,4 @@
-<p align="center"> # Object Mapper (PHP)</p>
+<h1 align="center">Object Mapper (PHP) </h1>
 
 ## About Object Mapper
 The project is a conceptualization of an object mapping application using the Google Maps JavaScript API. Object markers can be saved on a map interface based on user input. Markers are pulled from a MySQL database and disaplyed on a map in JSON format. 
