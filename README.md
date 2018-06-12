@@ -1,4 +1,4 @@
-# Object Mapper (PHP)
+<p align="center"> # Object Mapper (PHP)</p>
 
 ## About Object Mapper
 The project is a conceptualization of an object mapping application using the Google Maps JavaScript API. Object markers can be saved on a map interface based on user input. Markers are pulled from a MySQL database and disaplyed on a map in JSON format. 
@@ -16,6 +16,7 @@ The application takes advantage of Laravel by using its blade templating, authen
 - [MySQL](https://dev.mysql.com/doc/)
 - [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/tutorial)
 - [PHP](http://php.net/)
+
 
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
